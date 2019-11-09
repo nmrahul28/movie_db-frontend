@@ -15,10 +15,11 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 345,
+        maxWidth: 700,
     },
     media: {
         height: 0,
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const RecipeReviewCard = (props) => {
+const FavoriteCard = (props) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -47,12 +48,29 @@ const RecipeReviewCard = (props) => {
         setExpanded(!expanded);
     };
 
+    const addFavourite=(e)=>{
+        let emailId=localStorage.getItem('userEmail');
+        let movieId=props.movieobj.id;
+        let backdrop_path=props.movieobj.backdrop_path;
+        let movieObj={
+            firstName:'Manikanta Rahul',
+            lastName:'Nelluru',
+            id:100
+        }
+        axios.post("http://localhost:8080/add",{emailId, movieId, backdrop_path,movieObj})
+        .then((res)=>{
+            console.log(res);
+        }).catch((err)=>{
+            console.log(err.message)
+        })
+    }
+
     return (
         <Card className={classes.card}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
-                        {props.movieObj.original_title ? props.movieObj.title[0] : props.movieObj.original_name[0]}
+                        {props.movieobj.original_title ? props.movieobj.title[0] : props.movieobj.original_name[0]}
                     </Avatar>
                 }
                 action={
@@ -60,21 +78,21 @@ const RecipeReviewCard = (props) => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={props.movieObj.original_title ? props.movieObj.title : props.movieObj.original_name}
-                subheader={props.movieObj.release_date}
+                title={props.movieobj.original_title ? props.movieobj.title : props.movieobj.original_name}
+                subheader={props.movieobj.release_date}
             />
             <CardMedia
                 className={classes.media}
-                image={`https://image.tmdb.org/t/p/w500${props.movieObj.backdrop_path ? props.movieObj.backdrop_path : props.movieObj.poster_path}`}
+                image={`https://image.tmdb.org/t/p/w500${props.movieobj.backdrop_path ? props.movieobj.backdrop_path : props.movieobj.poster_path}`}
                 title="Paella dish"
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Rating: {props.movieObj.vote_average}/10 | Language:{props.movieObj.original_language}
+                    Rating: {props.movieobj.vote_average}/10 | Language:{props.movieobj.original_language}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton aria-label="add to favorites" onClick={(e)=>{addFavourite(e)}}>
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
@@ -95,11 +113,11 @@ const RecipeReviewCard = (props) => {
                 <CardContent>
                     <Typography paragraph>Overview:</Typography>
                     <Typography paragraph>
-                        {props.movieObj.overview}
+                        {props.movieobj.overview}
                     </Typography>
                 </CardContent>
             </Collapse>
         </Card>
     );
 }
-export default RecipeReviewCard;
+export default FavoriteCard;

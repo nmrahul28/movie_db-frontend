@@ -37,7 +37,7 @@ const MediaCard = (props) => {
           title="Contemplative Reptile"
         />
         <CardContent>
-          {<Typography gutterBottom variant="h5" component="h2">
+          {<Typography gutterBottom variant="h6" component="h2">
             {props.obj.original_title ? props.obj.title : props.obj.original_name}
           </Typography>}
           <Typography variant="body2" color="textSecondary" component="p">

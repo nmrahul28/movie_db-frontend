@@ -41,9 +41,8 @@ export class App extends Component {
       <BrowserRouter>
         <Route exact path='/' component={Login}></Route>
         <Route path='/signup' component={Register}></Route>
-        <Route path='/home' component={Home}></Route>
-        <Route path='/details' component={MovieCardDetails}></Route>
-        {/* <ProtectedRoute authenticated={this.state.authenticated} path='/home' component={Home}></ProtectedRoute> */}
+        <ProtectedRoute path='/home' component={Home}></ProtectedRoute>
+        <ProtectedRoute path='/details' component={MovieCardDetails}></ProtectedRoute>
       </BrowserRouter>
     )
   }
