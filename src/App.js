@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import Register from './components/register.js';
 import MovieCardDetails from './components/MovieCardDetails.js';
 import ProtectedRoute from './components/ProtectedRoute.js';
+import ShowFavourites from './components/showFavourites.js';
 
 export class App extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ export class App extends Component {
       } else {
         this.setState({
           userDetails: null,
-          authenticated:false
+          authenticated: false
         });
         localStorage.removeItem('userEmail');
         localStorage.removeItem('userName');
@@ -43,6 +44,7 @@ export class App extends Component {
         <Route path='/signup' component={Register}></Route>
         <ProtectedRoute path='/home' component={Home}></ProtectedRoute>
         <ProtectedRoute path='/details' component={MovieCardDetails}></ProtectedRoute>
+        <ProtectedRoute path='/fav' component={ShowFavourites}></ProtectedRoute>
       </BrowserRouter>
     )
   }

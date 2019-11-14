@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FavoriteCard from './favouriteCard.js';
+import MovieHeader from './movieHeader.js';
 
 export class MovieCardDetails extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export class MovieCardDetails extends Component {
     render() {
         return (
             <div>
+                <MovieHeader></MovieHeader>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12" style={{ marginTop: "30px", marginLeft: "8%" }}>

@@ -37,7 +37,7 @@ export class Login extends Component {
         e.preventDefault();
         fireAuth.auth().signInWithEmailAndPassword(email, password).then((res) => {
             localStorage.setItem('userEmail', res.user.email);
-            localStorage.setItem('userName',res.user.displayName)
+            localStorage.setItem('userName', res.user.displayName)
             console.log(res.user.displayName)
             this.props.history.push({ pathname: '/home', state: { name: res.user.displayName } })
         }).catch((err) => {

@@ -27,12 +27,14 @@ export class Header extends Component {
             sortby: e.target.value,
         }, () => { this.props.getSortBy(this.state.sortby) })
     }
-
+    favouriteList=()=>{
+        this.props.history.push('/fav');
+    }
     logout = () => {
         fireAuth.auth().signOut();
         this.props.history.push('/')
     }
-    
+
     render() {
         return (
             <div>
@@ -41,15 +43,15 @@ export class Header extends Component {
                         <h2 variant="h6" >TMoviedb</h2>&emsp;
                             <select className="dropbtn" style={{ marginRight: '20px' }} color="inherit" value={this.state.value} onChange={this.handleChangeDiscover}>
                             <option>Discover</option>
-                            <option value="movie">Movie</option>
                             <option value="tv">TV Series</option>
+                            <option value="movie">Movie</option>
                         </select>
-
                         <select className="dropbtn" style={{ marginRight: '20px' }} color="inherit" value={this.state.sortby} onChange={this.handleChangeSortby}>
                             <option>SortBy</option>
                             <option value="popularity.asc">Popularity Ascending</option>
-                            <option value="popularity.desc">Popularity Descinding</option>Sortby
-                            </select>
+                            <option value="popularity.desc">Popularity Descending</option>
+                        </select>
+                        <Button color="inherit" onClick={this.favouriteList}>Show Favourites</Button>
                         <Button color="inherit" onClick={this.logout}>Logout</Button>
                     </Toolbar>
                 </AppBar>

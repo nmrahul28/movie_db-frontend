@@ -24,7 +24,7 @@ export class Home extends Component {
     discoverState = (category) => {
         this.setState({
             value: category
-        })
+        }, () => { console.log(this.state.value) })
     }
     pageNo = (data) => {
         this.setState({
@@ -36,7 +36,8 @@ export class Home extends Component {
             <div>
                 <Header getDiscover={this.discoverState} getSortBy={this.sortType}></Header>
                 <Moviecards page={this.state.pageNumber} discover={this.state.value} sortBy={this.state.sortby}></Moviecards>
-                <Pagenation getPageNumber={this.pageNo}></Pagenation>
+                {this.state.value !== "" && this.state.value !== "Discover" ? <Pagenation getPageNumber={this.pageNo}></Pagenation>
+                    : null}
             </div>
         )
     }
